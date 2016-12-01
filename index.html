@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Prueba Ascensor</title>
+    
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+</head>
+<body>
+    <style>
+        .border-dashed-bottom {
+            border-bottom: 1px dashed #cbcbcb;
+        }
+        #edificio {
+            position: relative;
+        }
+        #edificio .piso {
+            height: 50px;
+            display: flex;
+            align-items: center;
+        }
+        #ascensor {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 30px;
+            height: 50px;
+            background-color: black;
+        }
+        #botonera .botones li {
+            float: left;
+            display: flex;
+            width: 64px;
+            height: 64px;
+            margin: 3px;
+            border: 1px solid #cbcbcb;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    </style>
+    <script>
+        $(document).ready(function(){
+            $('#botonera .botones li').click(function(){
+                var piso = $(this).text();
+                if(!$('#ascensor').is(':animated')){
+                    subirPiso(piso);
+                }
+            });
+        });
+        function subirPiso(piso){
+            // Variables
+            piso = piso - 2,
+            elevacion = parseInt($('#ascensor').css('bottom').slice(0, $('#ascensor').css('bottom').indexOf('px'))),
+            factor = piso - ((elevacion) / 50);
+            
+            // 
+            if(factor >= 0){
+                //
+                for(i=0;i<=factor;i++){
+                    $('#ascensor').animate({
+                        bottom: '+=50'
+                    }, 500);
+                }
+            } else if(factor < 0) {
+                //
+                factor = (factor * -1)-2;
+                //
+                for(i=0;i<=factor;i++){
+                    $('#ascensor').animate({
+                        bottom: '-=50'
+                    }, 500);
+                }
+            }
+        };
+    </script>
+    
+    <header class="container">
+        <div class="page-header">
+            <h1>Ascensor</h1>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section id="edificio" class="col-md-6">
+           <div id="ascensor"></div>
+            <div class="piso row border-dashed-bottom">
+                <h5>Piso 6</h5>
+            </div>
+            <div class="piso row border-dashed-bottom">
+                <h5>Piso 5</h5>
+            </div>
+            <div class="piso row border-dashed-bottom">
+                <h5>Piso 4</h5>
+            </div>
+            <div class="piso row border-dashed-bottom">
+                <h5>Piso 3</h5>
+            </div>
+            <div class="piso row border-dashed-bottom">
+                <h5>Piso 2</h5>
+            </div>
+            <div class="piso row border-dashed-bottom">
+                <h5>Piso 1</h5>
+            </div>
+        </section>
+        
+        <section id="botonera" class="col-md-6">
+            <!--<div class="botones row">
+                <ul>
+                    <li>7</li>
+                    <li>8</li>
+                    <li>9</li>
+                </ul>
+            </div>-->
+            <div class="botones row">
+                <ul>
+                    <li>4</li>
+                    <li>5</li>
+                    <li>6</li>
+                </ul>
+            </div>
+            <div class="botones row">
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+    
+    <footer></footer>
+</body>
+</html>
